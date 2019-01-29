@@ -53,6 +53,12 @@ Install the kubectl CLI using the instructions available at the URL below:
 
 [https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)
 
+Run the following command to add the `kubernetes` DC/OS CLI command:
+
+```
+dcos package install --yes --cli kubernetes
+```
+
 Add the following line to your /etc/hosts (or c:\Windows\System32\Drivers\etc\hosts) file:
 
 ```
