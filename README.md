@@ -343,8 +343,8 @@ The dklb EdgeLB pool is automatically updated on DC/OS:
 You can validate that you can access the web application PODs from your laptop using the following commands:
 
 ```
-curl -H "Host: http-echo-${CLUSTER}-1.com" http://${PUBLIC}:90${CLUSTER}
-curl -H "Host: http-echo-${CLUSTER}-2.com" http://${PUBLIC}:90${CLUSTER}
+curl -H "Host: http-echo-${CLUSTER}-1.com" http://${PUBLICIP}:90${CLUSTER}
+curl -H "Host: http-echo-${CLUSTER}-2.com" http://${PUBLICIP}:90${CLUSTER}
 ```
 
 ## 6. Leverage persistent storage using Portworx
