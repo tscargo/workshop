@@ -88,6 +88,9 @@ It will allow you to deploy a Kubernetes cluster with RBAC enabled, HA disabled 
 Create a file called deploy-kubernetes-cluster.sh with the following content:
 
 ```
+#!/bin/sh
+set -ex
+
 path=${APPNAME}/prod/k8s/cluster${1}
 serviceaccount=${APPNAME}-prod-k8s-cluster${1}
 underscore=${APPNAME}__prod__k8s__cluster${1}
@@ -95,7 +98,7 @@ underscore=${APPNAME}__prod__k8s__cluster${1}
 dcos security org service-accounts keypair private-${serviceaccount}.pem public-${serviceaccount}.pem
 dcos security org service-accounts delete ${serviceaccount}
 dcos security org service-accounts create -p public-${serviceaccount}.pem -d /${path} ${serviceaccount}
-dcos security secrets delete /${path}/private-${serviceaccount}
+dcos security secrets delete /${path}/private-${serviceaccount} || true
 dcos security secrets create-sa-secret --strict private-${serviceaccount}.pem ${serviceaccount} /${path}/private-${serviceaccount}
 
 dcos security org users grant ${serviceaccount} dcos:mesos:master:framework:role:cluster${1}-role create
@@ -131,7 +134,7 @@ It will allow you to create the DC/OS service account with the right permissions
 Deploy your Kubernetes cluster using the following command:
 
 ```
-chmod deploy-kubernetes-cluster.sh
+chmod +x deploy-kubernetes-cluster.sh
 ./deploy-kubernetes-cluster.sh ${CLUSTER}
 ```
 
